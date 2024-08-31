@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="hooking">
+      <UniqueIdentifier>{79c8c472-60d3-4f8c-aade-6a71b3dde21c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="unrealengine">
+      <UniqueIdentifier>{d404e50b-605e-42a1-8a39-16426c25a919}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="plugin">
+      <UniqueIdentifier>{0b23374c-fc06-43c8-9214-1e098d2903fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="unrealengine\core">
+      <UniqueIdentifier>{03a089da-26d4-4750-83d6-6d3825595de7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="unrealengine\helper">
+      <UniqueIdentifier>{6a87d5f3-68cd-4a9b-bac4-cb0f9f5b3600}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="unrealengine\array.h">
+      <Filter>unrealengine\core</Filter>
+    </ClInclude>
+    <ClInclude Include="unrealengine\unclass.h">
+      <Filter>unrealengine\core</Filter>
+    </ClInclude>
+    <ClInclude Include="unrealengine\unname.h">
+      <Filter>unrealengine\core</Filter>
+    </ClInclude>
+    <ClInclude Include="unrealengine\unobj.h">
+      <Filter>unrealengine\core</Filter>
+    </ClInclude>
+    <ClInclude Include="unrealengine\unstring.h">
+      <Filter>unrealengine\core</Filter>
+    </ClInclude>
+    <ClInclude Include="unrealengine\unstruct.h">
+      <Filter>unrealengine\helper</Filter>
+    </ClInclude>
+    <ClInclude Include="unrealengine\unfunc.h">
+      <Filter>unrealengine\helper</Filter>
+    </ClInclude>
+    <ClInclude Include="unrealengine\unparams.h">
+      <Filter>unrealengine\helper</Filter>
+    </ClInclude>
+    <ClInclude Include="hooking\hooking.h">
+      <Filter>hooking</Filter>
+    </ClInclude>
+    <ClInclude Include="plugin\pluginsdk.h">
+      <Filter>plugin</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="unrealengine\unclass.cpp">
+      <Filter>unrealengine\core</Filter>
+    </ClCompile>
+    <ClCompile Include="unrealengine\unname.cpp">
+      <Filter>unrealengine\core</Filter>
+    </ClCompile>
+    <ClCompile Include="unrealengine\unobj.cpp">
+      <Filter>unrealengine\core</Filter>
+    </ClCompile>
+    <ClCompile Include="unrealengine\unstring.cpp">
+      <Filter>unrealengine\core</Filter>
+    </ClCompile>
+    <ClCompile Include="unrealengine\unstruct.cpp">
+      <Filter>unrealengine\helper</Filter>
+    </ClCompile>
+    <ClCompile Include="unrealengine\unfunc.cpp">
+      <Filter>unrealengine\helper</Filter>
+    </ClCompile>
+    <ClCompile Include="hooking\hooking.cpp">
+      <Filter>hooking</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
