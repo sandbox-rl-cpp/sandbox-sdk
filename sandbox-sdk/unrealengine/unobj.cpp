@@ -2,8 +2,6 @@
 #include "unstruct.h"
 #include "unfunc.h"
 
-#include <Windows.h>
-
 void* UObject::VTable()
 {
 	return *reinterpret_cast<void**>(this);
@@ -33,7 +31,7 @@ TArray<UObject*>* UObject::objects()
 {
 	if (!g_objects)
 	{
-		g_objects = (TArray<UObject*>*)(reinterpret_cast<uintptr_t>(GetModuleHandleW(0)) + 0x24BF4D8);
+		g_objects = (TArray<UObject*>*)(reinterpret_cast<uintptr_t>(FName::names()) + 0x48);
 	}
 
 	return g_objects;
