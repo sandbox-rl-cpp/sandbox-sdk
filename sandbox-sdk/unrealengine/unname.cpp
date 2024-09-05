@@ -11,22 +11,23 @@ std::string FNameEntry::get_name()
 
 TArray<FNameEntry*>* FName::names()
 {
-	if (!g_names)
+	while (!g_names)
 	{
 		uintptr_t image_base = reinterpret_cast<uintptr_t>(GetModuleHandleW(0));
 		uintptr_t image_size = reinterpret_cast<IMAGE_NT_HEADERS*>(image_base + reinterpret_cast<IMAGE_DOS_HEADER*>(image_base)->e_lfanew)->OptionalHeader.SizeOfImage;
 		
-		std::vector<uint8_t> signature = { 'B', '.', 'y', '.', 't', '.', 'e', '.', 'P', '.', 'r', '.', 'o', '.', 'p', '.', 'e', '.', 'r', '.', 't', '.', 'y' };
-		uintptr_t signature_address = 0;
+		std::vector<uint8_t> signature = { 0x48, 0x8B, 0x05, '?', '?', '?', '?', 0x4C, 0x89, 0x3C, 0xC8 };
 		int32_t pos = 0;
 
 		for (uintptr_t address = image_base; address < image_base + image_size; address++)
 		{
-			if (address && *reinterpret_cast<uint8_t*>(address) == signature[pos] || signature[pos] == '.')
+			if (address && *reinterpret_cast<uint8_t*>(address) == signature[pos] || signature[pos] == '?')
 			{
-				if (pos == signature.size())
+				if (pos == signature.size() - 1)
 				{
-					signature_address = address - signature.size(); break;
+					auto offset = address - signature.size() + 1;
+					g_names = (TArray<FNameEntry*>*)(offset + *reinterpret_cast<uint32_t*>(offset + 3) + 7);
+					break;
 				}
 
 				pos++;
@@ -34,26 +35,6 @@ TArray<FNameEntry*>* FName::names()
 			else
 			{
 				pos = 0;
-			}
-		}
-		
-		if (signature_address)
-		{
-			for (uintptr_t address = image_base; address < image_base + image_size; address++)
-			{
-				if (address)
-				{
-					auto find_address = address + *reinterpret_cast<uint32_t*>(address + 3) + 7;
-
-					if (signature_address == find_address)
-					{
-						auto offset = address - 0xB;
-						
-						g_names = (TArray<FNameEntry*>*)(offset + *reinterpret_cast<uint32_t*>(offset + 3) - 9);
-
-						break;
-					}
-				}
 			}
 		}
 	}

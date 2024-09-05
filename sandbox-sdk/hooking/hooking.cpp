@@ -4,28 +4,9 @@ void Hooking::hook_function(const std::string& name, HookType type, std::functio
 {
 	UFunction* u_function = UFunction::find_function(name);
 
-	if (u_function)
+	if (u_function && hook)
 	{
-		int32_t index = u_function->ObjectIndex();
-		
-		switch (type)
-		{
-			case HookType::PE:
-			{
-				g_hooks[HookType::PE][index].push_back(hook);
-				break;
-			}
-			case HookType::PI:
-			{
-				g_hooks[HookType::PI][index].push_back(hook);
-				break;
-			}
-			case HookType::CF:
-			{
-				g_hooks[HookType::CF][index].push_back(hook);
-				break;
-			}
-		}
+		g_hooks[type][u_function->ObjectIndex()].push_back(hook);
 	}
 }
 
@@ -33,28 +14,22 @@ void Hooking::hook_function_post(const std::string& name, HookType type, std::fu
 {
 	UFunction* u_function = UFunction::find_function(name);
 
+	if (u_function && hook)
+	{
+		g_post_hooks[type][u_function->ObjectIndex()].push_back(hook);
+	}
+}
+
+void Hooking::unhook_function(const std::string& name, HookType type, std::function<void(UObject*, UFunction*, void*)> unhook)
+{
+	UFunction* u_function = UFunction::find_function(name);
+
 	if (u_function)
 	{
 		int32_t index = u_function->ObjectIndex();
 
-		switch (type)
-		{
-			case HookType::PE:
-			{
-				g_post_hooks[HookType::PE][index].push_back(hook);
-				break;
-			}
-			case HookType::PI:
-			{
-				g_post_hooks[HookType::PI][index].push_back(hook);
-				break;
-			}
-			case HookType::CF:
-			{
-				g_post_hooks[HookType::CF][index].push_back(hook);
-				break;
-			}
-		}
+		g_hooks[type].erase(index);
+		g_post_hooks[type].erase(index);
 	}
 }
 

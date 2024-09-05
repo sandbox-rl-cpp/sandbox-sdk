@@ -29,7 +29,7 @@ UObject* UObject::Class()
 
 TArray<UObject*>* UObject::objects()
 {
-	if (!g_objects)
+	while (!g_objects)
 	{
 		g_objects = (TArray<UObject*>*)(reinterpret_cast<uintptr_t>(FName::names()) + 0x48);
 	}

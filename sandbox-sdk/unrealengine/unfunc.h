@@ -36,7 +36,7 @@ public:
 		return *reinterpret_cast<T*>(reinterpret_cast<uint8_t*>(m_data) + m_params[name]);
 	}
 
-	class UnStruct get_struct(const std::string& name);
+	class UnStruct get_struct(const std::string& unstruct, const std::string& name);
 private:
 	void get_params(UFunction* function);
 };

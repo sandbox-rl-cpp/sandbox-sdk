@@ -18,6 +18,7 @@ public:
 
 	static void hook_function(const std::string& name, HookType type, std::function<void(UObject*, UFunction*, void*)> hook);
 	static void hook_function_post(const std::string& name, HookType type, std::function<void(UObject*, UFunction*, void*)> hook);
+	static void unhook_function(const std::string& name, HookType type, std::function<void(UObject*, UFunction*, void*)> unhook);
 
 	static void call_hooks(int32_t index, HookType type, UObject* caller, UFunction* function, void* params);
 	static void call_post_hooks(int32_t index, HookType type, UObject* caller, UFunction* function, void* params);

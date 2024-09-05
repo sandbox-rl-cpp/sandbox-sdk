@@ -36,9 +36,9 @@ void UnFunc::get_function(const std::string& name)
 	}
 }
 
-UnStruct UnFuncParams::get_struct(const std::string& name)
+UnStruct UnFuncParams::get_struct(const std::string& unstruct, const std::string& name)
 {
-	return UnStruct(reinterpret_cast<void*>(reinterpret_cast<uint8_t*>(m_data) + m_params[name]), name);
+	return UnStruct(reinterpret_cast<void*>(reinterpret_cast<uint8_t*>(m_data) + m_params[name]), unstruct);
 }
 
 void UnFuncParams::get_params(UFunction* function)
